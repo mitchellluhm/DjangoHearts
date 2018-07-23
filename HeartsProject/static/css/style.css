@@ -1,0 +1,65 @@
+img {
+	border: 1px solid black;
+	height: 60%;
+	width: 60%;
+}
+
+table {
+	table-layout: fixed;
+}
+
+td {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	padding-bottom: -20em;
+}
+
+.side_card {
+	border: 1px solid black;
+	height: 10%;
+	width: 10%;
+	transform: rotate(90deg);
+}
+
+.vertical_tr {
+}
+	
+.side_td {
+}
+
+#center_top {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	height: 84px;
+	width: 57.9px;
+	border: 2px solid black;
+}
+
+#center_left {
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	height: 84px;
+	width: 57.9px;
+	border: 2px solid black;
+}
+
+#center_right {
+	position: absolute;
+	top: 50%;
+	left: 60%;
+	height: 84px;
+	width: 57.9px;
+	border: 2px solid black;
+}
+
+#center_bottom {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	height: 84px;
+	width: 57.9px;
+	border: 2px solid black;
+}

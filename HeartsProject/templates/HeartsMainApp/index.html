@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+	  <meta charset="utf-8">
+      <title>Hearts</title>
+      <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+  </head>
+  <body>
+
+      <div style="position: absolute; top: 5px;">
+			    <!--<img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"> -->
+	        <table class="top_hand">
+		          <tr>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		              <td><img src="{% static "images/back.png" %}" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+
+	        </table>
+	    </div>
+
+		<div id="center_top"></div>
+		<div id="center_left"></div>
+		<div id="center_right"></div>
+		<div id="center_bottom"></div>
+		<!-- SIDE TABLES
+      <div style="position: relative; left: 5px; top: 50%">
+	        <table class="side_table" style="height: 200px;">
+		          <tr class="vertical_tr">
+		              <td class="side_td"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+   	              </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+                  <tr class="vertical_tr">
+    		          <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+	        </table>
+	    </div>
+
+      <div style="position: absolute; right: 5px; top: 50%">
+	        <table class="side_table" style="height: 200px;">
+		          <tr class="vertical_tr">
+		              <td class="side_td"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+   	              </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+                  <tr class="vertical_tr">
+    		          <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+		          <tr class="vertical_tr">
+		              <td class="vertical_tr"><img src="{% static "images/back.png" %}" class="side_card" alt="Uh Oh, didn't show!"></td>
+		          </tr>
+	        </table>
+	    </div>
+		END SIDE TABLES -->
+
+    <div style="position: absolute; bottom: 5px;">
+			<!--<img src="{% static "images/2_of_clubs.png" %}" alt="Uh Oh, didn't show!"> -->
+	  <table class="user_hand">
+		<tr>
+		  <td class="user_slot">{{ all_dict.card_1 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_2 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_3 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_4 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_5 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_6 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_7 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_8 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_9 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_10 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_11 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_12 | safe }}</td>
+		  <td class="user_slot">{{ all_dict.card_13 | safe }}</td>
+		</tr>
+
+	  </table>
+	</div>
+
+	<!-- JQuery source-->
+	<script
+	 src="http://code.jquery.com/jquery-3.3.1.js"
+	 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	 crossorigin="anonymous"></script>
+
+	<script src="{% static "script/script.js" %}"></script>
+
+	<script>
+		/*
+		var all_cards = [];
+		var x = '{{ all_dict | escapejs }}';
+{% for card in all_dict %}
+all_cards.push('{{ card | safe }}')
+{% endfor %}
+		*/
+		// todo figure out how to not reveal cards by hand for user
+		var cpu_hand_left = ['{{ all_dict.card_14 | escapejs }}', '{{ all_dict.card_15 | escapejs }}', '{{ all_dict.card_16 | escapejs }}', '{{ all_dict.card_17 | escapejs }}', '{{ all_dict.card_18 | escapejs }}', '{{ all_dict.card_19 | escapejs }}', '{{ all_dict.card_20 | escapejs }}', '{{ all_dict.card_21 | escapejs }}', '{{ all_dict.card_22 | escapejs }}', '{{ all_dict.card_23 | escapejs }}', '{{ all_dict.card_24 | escapejs }}', '{{ all_dict.card_25 | escapejs }}', '{{ all_dict.card_26 | escapejs }}'];
+
+		var cpu_hand_top = ['{{ all_dict.card_27 | escapejs }}', '{{ all_dict.card_28 | escapejs }}', '{{ all_dict.card_29 | escapejs }}', '{{ all_dict.card_30 | escapejs }}', '{{ all_dict.card_31 | escapejs }}', '{{ all_dict.card_32 | escapejs }}', '{{ all_dict.card_33 | escapejs }}', '{{ all_dict.card_34 | escapejs }}', '{{ all_dict.card_35 | escapejs }}', '{{ all_dict.card_36 | escapejs }}', '{{ all_dict.card_37 | escapejs }}', '{{ all_dict.card_38 | escapejs }}', '{{ all_dict.card_39 | escapejs }}'];
+
+
+		var cpu_hand_right = ['{{ all_dict.card_40 | escapejs }}', '{{ all_dict.card_41 | escapejs }}', '{{ all_dict.card_42 | escapejs }}', '{{ all_dict.card_43 | escapejs }}', '{{ all_dict.card_44 | escapejs }}', '{{ all_dict.card_45 | escapejs }}', '{{ all_dict.card_46 | escapejs }}', '{{ all_dict.card_47 | escapejs }}', '{{ all_dict.card_48 | escapejs }}', '{{ all_dict.card_49 | escapejs }}', '{{ all_dict.card_50 | escapejs }}', '{{ all_dict.card_51 | escapejs }}', '{{ all_dict.card_52 | escapejs }}'];
+
+	
+	</script>
+  </body>
+</html>
