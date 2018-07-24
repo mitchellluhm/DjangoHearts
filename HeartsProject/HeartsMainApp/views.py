@@ -46,6 +46,17 @@ def create_context_dict():
 # Create your views here.
 def index(request):
     # Create a new Game, assign the hands, set initial values
-    d = create_context_dict()
+    # TODO: problem, game refreshes after every submit
+    # Two views per one page?
+    # can we save and retrieve d?
+    # TODO: write d to model, retrieve if not starting a new game, make new if new game
     f = forms.SelectCardForm()
+    d = create_context_dict()
+
+    if request.method == "POST":
+        f = forms.SelectCardForm(request.POST)
+        if f.is_valid():
+            print(f.cleaned_data['card'])
+        
+
     return render(request, 'HeartsMainApp/index.html', context={"all_dict" : d, 'form' : f})
