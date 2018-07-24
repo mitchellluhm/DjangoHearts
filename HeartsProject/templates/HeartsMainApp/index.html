@@ -149,6 +149,7 @@
 	<!-- when a card is clicked on, fill in this form using JS -->
 	<div class="container" style="position: absolute; top: 50%;">
 		<form method="POST">
+			<!-- id : id_card -->
 			{{ form.as_p }}
 			{% csrf_token %}
 			<input type="submit" class="btn btn-primary" value="submit">
