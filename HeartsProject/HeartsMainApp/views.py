@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from HeartsMainApp.models import Game
+from . import forms
 import random
 
 def make_card_html_tags():
@@ -41,18 +43,9 @@ def create_context_dict():
 
     return cont_dict
 
-def send_json(d):
-    return JsonResponse(d)
-
 # Create your views here.
 def index(request):
-    context_dict = {
-        #                     V this syntax is different when sending it thru cont
-        "ins_me" : '<img src="/static/images/5_of_clubs.png" alt="Uh Oh, didnt show!">',
-        "ins_me2" : "<em> HEY </em>",
-    } 
+    # Create a new Game, assign the hands, set initial values
     d = create_context_dict()
-    # d.__setitem__('all', d)
-    # print(d['all'])
-    # send_json(d)
-    return render(request, 'HeartsMainApp/index.html', context={"all_dict" : d})
+    f = forms.SelectCardForm()
+    return render(request, 'HeartsMainApp/index.html', context={"all_dict" : d, 'form' : f})

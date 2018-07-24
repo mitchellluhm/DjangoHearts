@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+	var turn_number;
+
+	function check_valid_move() {
+		// takes a card user wants to play, see if they can play it
+	}	
+
 	$(".user_hand").width($(window).width());
 
 	$('.user_slot').click(function(){
