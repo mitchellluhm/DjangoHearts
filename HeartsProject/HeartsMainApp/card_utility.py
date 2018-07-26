@@ -1,6 +1,6 @@
 import random
 
-def make_card_html_tags():
+def make_card_html_tags(exists=False, cards_order=[]):
     pre_str = '<img src="/static/images/'
     post_str = '.png" alt="Uh Oh, didnt show!">'
     card_suits = ["clubs", "spades", "hearts", "diamonds"]
@@ -9,18 +9,24 @@ def make_card_html_tags():
     card_htmls = []
 
     # construct the full string
+    c = -1 
     for suit in card_suits:
         for val in card_vals:
+            c += 1
             temp = pre_str
-            temp += val
-            temp += "_of_"
-            temp += suit
+            if not exists:
+                temp += val
+                temp += "_of_"
+                temp += suit
+            else:
+                temp += cards_order[c]
+
             temp += post_str
             card_htmls.append(temp)
 
     return card_htmls
 
-def create_context_dict():
+def create_context_dict(exists=False, card_order=[]):
     pre_str_key = "card_"
     key_names = []
 
@@ -30,9 +36,15 @@ def create_context_dict():
         key_names.append(temp)
 
     cont_dict = dict()
-    keys = random.sample(key_names, len(key_names))
-    html_tags = make_card_html_tags()
-    values = random.sample(html_tags, len(html_tags))
+    # i don't think shuffling the keys matter for dict
+    #keys = random.sample(key_names, len(key_names))
+    keys = key_names
+    if not exists:
+        html_tags = make_card_html_tags()
+        values = random.sample(html_tags, len(html_tags))
+    else:
+        html_tags = make_card_html_tags(True, card_order)
+        values = html_tags
 
     for n in range(0,52):
         cont_dict.__setitem__(keys[n], values[n])
@@ -121,3 +133,61 @@ def create_initial_hand_str(hand, d):
         hand_str += card_code_from_card(card_from_html(d[c]))
 
     return hand_str
+
+def card_from_card_code(cc):
+    card = ""
+
+    # convert value
+    if cc[0] == "A":
+        card += "ace_of_"
+    elif cc[0] == "K":
+        card += "king_of_"
+    elif cc[0] == "Q":
+        card += "queen_of_"
+    elif cc[0] == "J":
+        card += "jack_of_"
+    elif cc[0] == "X":
+        card += "10_of_"
+    else:
+        card += cc[0]
+        card += "_of_"
+
+    # convert suit
+    if cc[1] == "S":
+        card += "spades"
+    elif cc[1] == "C":
+        card += "clubs"
+    elif cc[1] == "H":
+        card += "hearts"
+    elif cc[1] == "D":
+        card += "diamonds"
+    else:
+        print("Error: card_from_card_code()")
+
+    return card
+
+def dict_from_hand_str(h0, h1, h2, h3):
+    d = dict()
+    card_order = []
+    for x in range(0, 13):
+        i = x * 2
+        card_order.append(card_from_card_code(h0[i:i+2]))
+    for x in range(0, 13):
+        i = x * 2
+        card_order.append(card_from_card_code(h1[i:i+2]))
+    for x in range(0, 13):
+        i = x * 2
+        card_order.append(card_from_card_code(h2[i:i+2]))
+    for x in range(0, 13):
+        i = x * 2
+        card_order.append(card_from_card_code(h3[i:i+2]))
+
+        
+    #make_card_html_tags(True, card_order)
+    d2 = create_context_dict(True, card_order)
+    print("d2 card_1 is " + d2['card_1'])
+    print("d2 card_50 is " + d2['card_50'])
+
+
+
+
