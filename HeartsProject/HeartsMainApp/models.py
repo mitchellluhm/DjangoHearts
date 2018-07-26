@@ -41,4 +41,4 @@ class Game(models.Model):
     trick_12 = models.CharField(max_length=13)
     trick_13 = models.CharField(max_length=13)
     '''
-    trick_history = models.CharField(max_length=117)
+    trick_history = models.CharField(max_length=117, default="")

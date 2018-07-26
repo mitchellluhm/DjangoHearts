@@ -70,7 +70,7 @@ def index(request):
     if request.method == "POST":
         f = forms.SelectCardForm(request.POST)
         if f.is_valid():
-            print(f.cleaned_data['card'])
+            # print(f.cleaned_data['card'])
             f.save(commit=True)
         
 
