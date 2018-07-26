@@ -26,6 +26,7 @@ class Game(models.Model):
     # S : which hand started
     # H0 : denotes which card was played by H0
     # W : which hand was the winner of the trick
+    '''
     trick_1 = models.CharField(max_length=13)
     trick_2 = models.CharField(max_length=13)
     trick_3 = models.CharField(max_length=13)
@@ -39,3 +40,5 @@ class Game(models.Model):
     trick_11 = models.CharField(max_length=13)
     trick_12 = models.CharField(max_length=13)
     trick_13 = models.CharField(max_length=13)
+    '''
+    trick_history = models.CharField(max_length=117)

@@ -105,7 +105,7 @@ $(document).ready(function(){
 	$('.user_slot').click(function(){
 		var card_html = $(this).html();
 		var card_code = string_to_textcode(html_to_string(card_html));
-		$('#id_card').val(card_code);
+		$('#id_trick_history').val($('#id_trick_history').val().concat(card_code));
 
 		$('#center_bottom').html($(this).children('img'));
 		$(this).children('img').remove();

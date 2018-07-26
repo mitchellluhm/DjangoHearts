@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from HeartsMainApp.models import Game
 from . import forms
+# from HeartsMainApp.forms import SelectCardForm
 import random
 
 def make_card_html_tags():
@@ -43,6 +44,8 @@ def create_context_dict():
 
     return cont_dict
 
+game_started = False
+print("set game_started to False")
 # Create your views here.
 def index(request):
     # Create a new Game, assign the hands, set initial values
@@ -50,6 +53,17 @@ def index(request):
     # Two views per one page?
     # can we save and retrieve d?
     # TODO: write d to model, retrieve if not starting a new game, make new if new game
+
+    # get or create Game
+
+    if game_started:
+        # update form attributed needed
+        print("game already started")
+
+    else:
+        # create d
+        print("game has not been started")
+
     f = forms.SelectCardForm()
     d = create_context_dict()
 
@@ -57,6 +71,7 @@ def index(request):
         f = forms.SelectCardForm(request.POST)
         if f.is_valid():
             print(f.cleaned_data['card'])
+            f.save(commit=True)
         
 
     return render(request, 'HeartsMainApp/index.html', context={"all_dict" : d, 'form' : f})
