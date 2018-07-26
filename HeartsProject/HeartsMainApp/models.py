@@ -8,19 +8,19 @@ class Game(models.Model):
     cards played by round
     '''
 
-    date_played = models.DateField()
+    date_played = models.DateField(null=True)
 
     # "2C,3H,4S,5D,...,6H"
-    hand_0_initial = models.CharField(max_length=38)
-    hand_1_initial = models.CharField(max_length=38)
-    hand_2_initial = models.CharField(max_length=38)
-    hand_3_initial = models.CharField(max_length=38)
+    hand_0_initial = models.CharField(max_length=38, default="0000000000000")
+    hand_1_initial = models.CharField(max_length=38, default="0000000000000")
+    hand_2_initial = models.CharField(max_length=38, default="0000000000000")
+    hand_3_initial = models.CharField(max_length=38, default="0000000000000")
 
     # 1 - 13
-    trick_number = models.IntegerField()
+    trick_number = models.IntegerField(default=0)
 
     # true : hearts has been played
-    hearts_played = models.BooleanField()
+    hearts_played = models.BooleanField(default=False)
 
     # "S,H0,H1,H2,H3,W"
     # S : which hand started
