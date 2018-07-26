@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 from HeartsMainApp.models import Game
 from . import forms
 # from HeartsMainApp.forms import SelectCardForm
@@ -44,8 +45,74 @@ def create_context_dict():
 
     return cont_dict
 
-game_started = False
-print("set game_started to False")
+def card_from_html(c_html):
+    start = c_html.index("/images/")
+    end = c_html.index(".png")
+    return c_html[start+8:end]
+
+def card_code_from_card(c):
+    code = ""
+    of = c.index("_of_")
+    c_val = c[0:of]
+    c_suit = c[of+4:]
+
+    # assign value part of code
+    if c_val == "2":
+        code += "2"
+    elif c_val == "3":
+        code += "3"
+    elif c_val == "4":
+        code += "4"
+    elif c_val == "5":
+        code += "5"
+    elif c_val == "6":
+        code += "6"
+    elif c_val == "7":
+        code += "7"
+    elif c_val == "8":
+        code += "8"
+    elif c_val == "9":
+        code += "9"
+    elif c_val == "10":
+        code += "X"
+    elif c_val == "jack":
+        code += "J"
+    elif c_val == "queen":
+        code += "Q"
+    elif c_val == "king":
+        code += "K"
+    elif c_val == "ace":
+        code += "A"
+    else:
+        print("Error: card_code_from_card()")
+
+    # assign suit part of code
+    if c_suit == "spades":
+        code += "S"
+    elif c_suit == "clubs":
+        code += "C"
+    elif c_suit == "hearts":
+        code += "H"
+    elif c_suit == "diamonds":
+        code += "D"
+    else:
+        print("Error: card_code_from_card()")
+
+    return code
+
+def create_initial_hand_str(hand, d):
+    hand_str = ""
+
+    if hand == 0:
+        cards = ['card_1', 'card_2', 'card_3', 'card_4', 'card_5',
+                 'card_6', 'card_7', 'card_8', 'card_9', 'card_10',
+                 'card_11', 'card_12',  'card_13',]
+        for c in cards:
+            hand_str += card_code_from_card(card_from_html(d[c]))
+
+    return hand_str
+
+
 # Create your views here.
 def index(request):
     # Create a new Game, assign the hands, set initial values
@@ -55,17 +122,22 @@ def index(request):
     # TODO: write d to model, retrieve if not starting a new game, make new if new game
 
     # get or create Game
+    try:
+        g = Game.objects.get(game_num=778)
+        print("got game with specified game_num")
+    except ObjectDoesNotExist:
+        print("Tried to get Game w/ game_num=777, but it does not exist")
+        print("Now creating game with game_num 777")
+        d = create_context_dict()
+        f = forms.SelectCardForm()
+        h = create_initial_hand_str(0, d)
+        g = Game.objects.get_or_create(game_num=778, hand_0_initial=h)
 
-    if game_started:
-        # update form attributed needed
-        print("game already started")
-
-    else:
-        # create d
-        print("game has not been started")
-
-    f = forms.SelectCardForm()
+    
     d = create_context_dict()
+    f = forms.SelectCardForm()
+    create_initial_hand_str(0, d)
+
 
     if request.method == "POST":
         f = forms.SelectCardForm(request.POST)

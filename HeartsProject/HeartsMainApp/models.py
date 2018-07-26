@@ -8,13 +8,15 @@ class Game(models.Model):
     cards played by round
     '''
 
+    game_num = models.IntegerField(default=0)
+
     date_played = models.DateField(null=True)
 
     # "2C,3H,4S,5D,...,6H"
-    hand_0_initial = models.CharField(max_length=38, default="0000000000000")
-    hand_1_initial = models.CharField(max_length=38, default="0000000000000")
-    hand_2_initial = models.CharField(max_length=38, default="0000000000000")
-    hand_3_initial = models.CharField(max_length=38, default="0000000000000")
+    hand_0_initial = models.CharField(max_length=26, default="0")
+    hand_1_initial = models.CharField(max_length=26, default="0")
+    hand_2_initial = models.CharField(max_length=26, default="0")
+    hand_3_initial = models.CharField(max_length=26, default="0")
 
     # 1 - 13
     trick_number = models.IntegerField(default=0)
