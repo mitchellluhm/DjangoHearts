@@ -102,13 +102,27 @@ def card_code_from_card(c):
 
 def create_initial_hand_str(hand, d):
     hand_str = ""
+    cards = []
 
     if hand == 0:
         cards = ['card_1', 'card_2', 'card_3', 'card_4', 'card_5',
                  'card_6', 'card_7', 'card_8', 'card_9', 'card_10',
                  'card_11', 'card_12',  'card_13',]
-        for c in cards:
-            hand_str += card_code_from_card(card_from_html(d[c]))
+    elif hand == 1:
+        cards = ['card_14', 'card_15', 'card_16', 'card_17', 'card_18',
+                 'card_19', 'card_20', 'card_21', 'card_22', 'card_23',
+                 'card_24', 'card_25',  'card_26',]
+    elif hand == 2:
+        cards = ['card_27', 'card_28', 'card_29', 'card_30', 'card_31',
+                 'card_32', 'card_33', 'card_34', 'card_35', 'card_36',
+                 'card_37', 'card_38',  'card_39',]
+    elif hand == 3:
+        cards = ['card_40', 'card_41', 'card_42', 'card_43', 'card_44',
+                 'card_45', 'card_46', 'card_47', 'card_48', 'card_49',
+                 'card_50', 'card_51',  'card_52',]
+
+    for c in cards:
+        hand_str += card_code_from_card(card_from_html(d[c]))
 
     return hand_str
 
@@ -123,15 +137,20 @@ def index(request):
 
     # get or create Game
     try:
-        g = Game.objects.get(game_num=778)
+        g = Game.objects.get(game_num=779)
         print("got game with specified game_num")
     except ObjectDoesNotExist:
-        print("Tried to get Game w/ game_num=777, but it does not exist")
-        print("Now creating game with game_num 777")
+        print("Tried to get Game w/ game_num, but it does not exist")
+        print("Now creating game with game_num")
         d = create_context_dict()
         f = forms.SelectCardForm()
         h = create_initial_hand_str(0, d)
-        g = Game.objects.get_or_create(game_num=778, hand_0_initial=h)
+        g = Game.objects.get_or_create(game_num=779,
+                                       hand_0_initial=create_initial_hand_str(0, d),
+                                       hand_1_initial=create_initial_hand_str(1, d),
+                                       hand_2_initial=create_initial_hand_str(2, d),
+                                       hand_3_initial=create_initial_hand_str(3, d),
+                                       )
 
     
     d = create_context_dict()
