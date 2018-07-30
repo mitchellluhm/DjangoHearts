@@ -135,6 +135,7 @@ def create_initial_hand_str(hand, d):
     return hand_str
 
 def card_from_card_code(cc):
+
     card = ""
 
     # convert value
@@ -167,8 +168,9 @@ def card_from_card_code(cc):
     return card
 
 def dict_from_hand_str(h0, h1, h2, h3):
-    d = dict()
+
     card_order = []
+
     for x in range(0, 13):
         i = x * 2
         card_order.append(card_from_card_code(h0[i:i+2]))
@@ -184,10 +186,23 @@ def dict_from_hand_str(h0, h1, h2, h3):
 
         
     #make_card_html_tags(True, card_order)
-    d2 = create_context_dict(True, card_order)
-    print("d2 card_1 is " + d2['card_1'])
-    print("d2 card_50 is " + d2['card_50'])
+    d = create_context_dict(True, card_order)
 
+    return d
 
-
+def find_hand_with(cc, g):
+    '''
+    INPUT: CARDCODE cc, GAME g
+    OUTPUT: hand 0 1 2 3 which contains card with CARDCODE cc
+    '''
+    if cc in g.hand_0_initial:
+        return 0
+    elif cc in g.hand_1_initial:
+        return 1
+    elif cc in g.hand_2_initial:
+        return 2
+    elif cc in g.hand_3_initial:
+        return 3
+    else:
+        return -2
 

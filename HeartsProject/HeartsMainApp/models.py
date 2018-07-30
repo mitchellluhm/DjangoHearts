@@ -21,6 +21,9 @@ class Game(models.Model):
     # 1 - 13
     trick_number = models.IntegerField(default=0)
 
+    # 0 - 3
+    trick_winner = models.IntegerField(default=-1)
+
     # true : hearts has been played
     hearts_played = models.BooleanField(default=False)
 

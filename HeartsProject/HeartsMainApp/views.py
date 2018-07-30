@@ -9,43 +9,63 @@ from . import card_utility as CardUtil
 
 # Create your views here.
 def index(request):
+    # called on page refresh and submit button pressed
+    print("index() function called from views.py")
 
-    d = CardUtil.create_context_dict()
-    print("card_1 from d" + d['card_1'])
-    print("card_50 from d" + d['card_50'])
-    f = forms.SelectCardForm()
-    CardUtil.dict_from_hand_str(CardUtil.create_initial_hand_str(0, d),
-                                CardUtil.create_initial_hand_str(1, d),
-                                CardUtil.create_initial_hand_str(2, d),
-                                CardUtil.create_initial_hand_str(3, d),
-                                )
+    form = forms.SelectCardForm()
     # get or create Game
     try:
         # retrieve an already existing game
-        g = Game.objects.get(game_num=779)
+        g = Game.objects.get(game_num=780)
         print("got game with specified game_num")
+        print("g.h0 is " + g.hand_0_initial)
+
+        # create all_dict to use as context dictionary from hands in model
+        all_dict = CardUtil.dict_from_hand_str(g.hand_0_initial,
+                                               g.hand_1_initial,
+                                               g.hand_2_initial,
+                                               g.hand_3_initial)
+
+        current_hand = CardUtil.find_hand_with("2C", g)
+        # have preceding players play and display cards until it is user's turn
+        if current_hand == 0:
+            # user's turn
+            print("Waiting for user to select a card")
+        elif current_hand == 1:
+            # left hand's turn
+            g.trick_history += g.hand_1_initial[0:2]
+        elif current_hand == 2:
+            # top hand's turn
+            g.trick_history += g.hand_2_initial[0:2]
+        elif current_hand == 3:
+            # right hand's turn
+            g.trick_history += g.hand_3_initial[0:2]
+                                            
+
     except ObjectDoesNotExist:
         # create the game for first time
         print("Tried to get Game w/ game_num, but it does not exist")
         print("Now creating game with game_num")
-        g = Game.objects.get_or_create(game_num=779,
-                                       hand_0_initial=CardUtil.create_initial_hand_str(0, d),
-                                       hand_1_initial=CardUtil.create_initial_hand_str(1, d),
-                                       hand_2_initial=CardUtil.create_initial_hand_str(2, d),
-                                       hand_3_initial=CardUtil.create_initial_hand_str(3, d),
-                                       )
-        # TODO: dynamically load / save context dictionary
+        all_dict = CardUtil.create_context_dict()
+        g = Game.objects.get_or_create(game_num=780,
+                   hand_0_initial=CardUtil.create_initial_hand_str(0, all_dict),
+                   hand_1_initial=CardUtil.create_initial_hand_str(1, all_dict),
+                   hand_2_initial=CardUtil.create_initial_hand_str(2, all_dict),
+                   hand_3_initial=CardUtil.create_initial_hand_str(3, all_dict))
 
-    
-    d = CardUtil.create_context_dict()
-    f = forms.SelectCardForm()
-
+        # set "trick_winner" to who has 2 of clubs
+        # this will the first player to place a card on the first trick
+        g.trick_winner = find_hand_with("2C", g)
 
     if request.method == "POST":
-        f = forms.SelectCardForm(request.POST)
-        if f.is_valid():
+        # select data from trick_history box, and save it to specific instance of g
+        form = forms.SelectCardForm(request.POST, instance=g)
+        if form.is_valid():
             # print(f.cleaned_data['card'])
-            f.save(commit=True)
+            print("Form is valid: " + form.cleaned_data['trick_history'])
+            # g.trick_history += form.cleaned_data['trick_history']
+            form.save(commit=True)
         
 
-    return render(request, 'HeartsMainApp/index.html', context={"all_dict" : d, 'form' : f})
+    return render(request, 'HeartsMainApp/index.html',
+                  context={"all_dict" : all_dict, 'form' : form})
