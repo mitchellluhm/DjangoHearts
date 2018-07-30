@@ -26,7 +26,13 @@ def index(request):
                                                g.hand_2_initial,
                                                g.hand_3_initial)
 
-        current_hand = CardUtil.find_hand_with("2C", g)
+        if g.trick_number == 0:
+            # game has yet to start
+            current_hand = CardUtil.find_hand_with("2C", g)
+        else:
+            # game has started
+            # find winner of last trick
+            current_hand = 1
         # have preceding players play and display cards until it is user's turn
         if current_hand == 0:
             # user's turn
@@ -40,7 +46,10 @@ def index(request):
         elif current_hand == 3:
             # right hand's turn
             g.trick_history += g.hand_3_initial[0:2]
-                                            
+
+        g.trick_winner = CardUtil.next_hand_from(current_hand)
+        g.trick_number += 1
+        g.save()
 
     except ObjectDoesNotExist:
         # create the game for first time
@@ -56,6 +65,8 @@ def index(request):
         # set "trick_winner" to who has 2 of clubs
         # this will the first player to place a card on the first trick
         g.trick_winner = find_hand_with("2C", g)
+        # TODO : check this : update model with trick_winner
+        g.save()
 
     if request.method == "POST":
         # select data from trick_history box, and save it to specific instance of g

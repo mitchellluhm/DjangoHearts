@@ -206,3 +206,10 @@ def find_hand_with(cc, g):
     else:
         return -2
 
+def next_hand_from(h):
+    if h in [0, 1, 2]:
+        return h + 1
+    elif h == 3:
+        return 0;
+    else:
+        return -2
