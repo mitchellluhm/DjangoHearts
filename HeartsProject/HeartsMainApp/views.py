@@ -26,13 +26,29 @@ def index(request):
                                                g.hand_2_initial,
                                                g.hand_3_initial)
 
-        if g.trick_number == 0:
-            # game has yet to start
+        l = len(g.trick_history)
+        if l == 0:
+            # find 2C
             current_hand = CardUtil.find_hand_with("2C", g)
-        else:
-            # game has started
-            # find winner of last trick
+            '''
+        elif (l % 8) != 0:
+            # increment hand
+            current_hand = CardUtil.get_next_hand(current_hand, g)
+            '''
+        elif (l % 8) == 2:
             current_hand = 1
+        elif (l % 8) == 4:
+            current_hand = 2
+        elif (l % 8) == 6:
+            current_hand = 3
+        else:
+            # find trick winner, set hand
+            # flush screen
+            current_hand = CardUtil.get_next_hand(-2, g)
+
+        print("current_hand: " + str(current_hand))
+
+
         # have preceding players play and display cards until it is user's turn
         if current_hand == 0:
             # user's turn

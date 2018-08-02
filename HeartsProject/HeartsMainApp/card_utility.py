@@ -213,3 +213,54 @@ def next_hand_from(h):
         return 0;
     else:
         return -2
+
+def get_trick_winner(vals):
+    max_v = vals[0]
+    max_i = 0
+    cur_i = 0
+
+    for v in vals:
+        if v == "A":
+            v_translated = 13
+        elif v == "Q":
+            v_translated = 12
+        elif v == "J":
+            v_translated = 11
+        elif v == "X":
+            v_translated = 10
+        else:
+            v_translated = v
+
+        if v < v_translated:
+            max_v = v_translated
+            max_i = cur_i
+
+        cur_i += 1
+
+    return max_i
+
+
+def get_next_hand(h, g):
+    '''
+    input: most recent current_hand and game
+    desc: see if most recent hand has played, update accordingly
+    '''
+    if h > -1:
+        return next_hand_from(h)
+    else:
+        hist = g.trick_history
+        i = (len(hist) - 1) * 8
+        trick = hist[i:i+8]
+        suit = trick[1]
+        vals = [-1, -1, -1, -1]
+        vals[0] = trick[0]
+        
+        # decide the winner
+        if trick[3] == suit:
+            vals[1] = trick[2]
+        if trick[5] == suit:
+            vals[2] = trick[4]
+        if trick[7] == suit:
+            vals[3] = trick[6]
+
+        return get_trick_winner(vals)
